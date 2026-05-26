@@ -47,8 +47,8 @@ export default function Dashboard() {
               Discover what marketing topics are getting attention right now.
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
-              Pull current coverage from GDELT, analyze it with an AI agent, and turn it into practical trend insights,
-              recommended actions, and source-backed campaign ideas.
+              Pull current coverage from recent news sources, analyze it with an AI agent, and turn it into practical
+              trend insights, recommended actions, and source-backed campaign ideas.
             </p>
           </div>
         </section>
@@ -129,4 +129,3 @@ export default function Dashboard() {
     </main>
   );
 }
-

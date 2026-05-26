@@ -12,7 +12,7 @@ from app.schemas import (
     GDELTFetchResponse,
     HealthResponse,
 )
-from app.services.gdelt_service import fetch_gdelt_articles
+from app.services.gdelt_service import GDELTFetchError, fetch_gdelt_articles
 from app.services.trend_analyzer import analyze_trends_with_langchain
 
 settings = get_settings()
@@ -40,6 +40,8 @@ async def fetch_gdelt(
 ) -> GDELTFetchResponse:
     try:
         articles = await fetch_gdelt_articles(query=query, max_articles=max_articles, settings=settings)
+    except GDELTFetchError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
     except Exception as exc:  # pragma: no cover - external dependency failure
         raise HTTPException(status_code=502, detail=f"Failed to fetch GDELT articles: {exc}") from exc
 
@@ -54,6 +56,8 @@ async def analyze_trends(payload: AnalyzeTrendsRequest) -> AnalyzeTrendsResponse
             max_articles=payload.max_articles,
             settings=settings,
         )
+    except GDELTFetchError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
     except Exception as exc:  # pragma: no cover - external dependency failure
         raise HTTPException(status_code=502, detail=f"Failed to fetch GDELT articles: {exc}") from exc
 

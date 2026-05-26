@@ -36,9 +36,8 @@ export function SearchPanel({ value, onChange, onSubmit, isLoading }: SearchPane
         </button>
       </div>
       <p className="text-sm text-slate-400">
-        Enter a topic to pull recent coverage from GDELT and generate marketing recommendations.
+        Enter a topic to pull recent coverage and generate marketing recommendations.
       </p>
     </form>
   );
 }
-
